@@ -1,0 +1,34 @@
+[project]
+name = "git-rag-embedder"
+version = "0.1.0"
+description = "Lightweight library to convert GitHub repositories into embeddings"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"},
+]
+dependencies = [
+    "requests>=2.25.0",
+    "tiktoken>=0.4.0",
+    "numpy>=1.21.0",
+    "python-dotenv>=0.19.0",
+    "sentence-transformers>=2.2.0",
+    "transformers>=4.20.0",
+    "torch>=1.9.0",
+]
+requires-python = ">=3.8"
+
+[project.optional-dependencies]
+openai = [
+    "openai>=1.0.0",
+]
+dev = [
+    "pytest>=6.0",
+    "black>=21.0",
+    "isort>=5.0",
+]
+
+[project.scripts]
+gitrag = "git_rag_embedder.cli:main"
+
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
