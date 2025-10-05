@@ -1,43 +1,40 @@
-GitRAG Embedder: Git Repository to Embeddings Pipeline
-https://img.shields.io/badge/Python-3.8%252B-blue
-https://img.shields.io/badge/RAG-Embeddings-green
-https://img.shields.io/badge/Git-Repository%2520Processing-orange
-https://img.shields.io/badge/License-MIT-yellow
+# GitRAG Embedder: Git Repository to Embeddings Pipeline
 
-🚀 Overview
-GitRAG Embedder is a focused library that converts Git repositories into embedding vectors. Pure processing pipeline - from repository cloning to embedding generation. No quality metrics, no search capabilities, just embeddings.
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![RAG](https://img.shields.io/badge/RAG-Embeddings-green)
+![Git](https://img.shields.io/badge/Git-Repository%20Processing-orange)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-Core Focus: Transform any Git repository into embedding vectors for your RAG systems.
+## 🚀 Overview
 
-✨ Features
-🔍 Repository Processing
-Git Integration: Clone and process any Git repository
+**GitRAG Embedder** is a focused library that converts Git repositories into embedding vectors. Pure processing pipeline - from repository cloning to embedding generation. No quality metrics, no search capabilities, just embeddings.
 
-Multi-Format Support: Process .py, .md, .rst, .txt files
+**Core Focus**: Transform any Git repository into embedding vectors for your RAG systems.
 
-Smart Chunking: Configurable text splitting with overlap
+## ✨ Features
 
-Selective Processing: Filter by file type and directory
+### 🔍 Repository Processing
+- **Git Integration**: Clone and process any Git repository
+- **Multi-Format Support**: Process `.py`, `.md`, `.rst`, `.txt` files
+- **Smart Chunking**: Configurable text splitting with overlap
+- **Selective Processing**: Filter by file type and directory
+- **Batch Processing**: Efficient handling of large codebases
 
-Batch Processing: Efficient handling of large codebases
+### 📊 Multiple Embedding Backends
+- **OpenAI Embeddings**: Support for text-embedding-ada-002, text-embedding-3-small/large
+- **Sentence Transformers**: Local models like all-MiniLM-L6-v2
+- **HuggingFace Transformers**: Custom transformer models
+- **Batch Processing**: Efficient batch embedding generation
+- **Automatic Retries**: Built-in error handling and retries
 
-📊 Multiple Embedding Backends
-OpenAI Embeddings: Support for text-embedding-ada-002, text-embedding-3-small/large
+## 📦 Installation
 
-Sentence Transformers: Local models like all-MiniLM-L6-v2
-
-HuggingFace Transformers: Custom transformer models
-
-Batch Processing: Efficient batch embedding generation
-
-Automatic Retries: Built-in error handling and retries
-
-📦 Installation
-bash
+```bash
 pip install git-rag-embedder
-Optional dependencies (install as needed):
+```
 
-bash
+**Optional dependencies** (install as needed):
+```bash
 # For OpenAI embeddings
 pip install openai
 
@@ -46,9 +43,13 @@ pip install sentence-transformers
 
 # For HuggingFace embeddings  
 pip install transformers torch
-🚀 Quick Start
-Basic Usage
-python
+```
+
+## 🚀 Quick Start
+
+### Basic Usage
+
+```python
 from git_rag_embedder import GitRAGEmbedder
 
 # Initialize with default settings (Sentence Transformers)
@@ -60,8 +61,11 @@ embeddings = embedder.process_repository(
 )
 
 print(f"Generated {len(embeddings)} embedding vectors")
-Using Different Backends
-python
+```
+
+### Using Different Backends
+
+```python
 # OpenAI embeddings
 embedder = GitRAGEmbedder(
     embedding_backend="openai",
@@ -80,8 +84,11 @@ embedder = GitRAGEmbedder(
     embedding_backend="huggingface",
     model_name="sentence-transformers/all-MiniLM-L6-v2"
 )
-Advanced Configuration
-python
+```
+
+### Advanced Configuration
+
+```python
 embeddings = embedder.process_repository(
     repo_url="https://github.com/username/repository",
     chunk_size=1000,
@@ -91,9 +98,13 @@ embeddings = embedder.process_repository(
     batch_size=32,
     max_files=1000
 )
-⚙️ Configuration
-Processing Parameters
-python
+```
+
+## ⚙️ Configuration
+
+### Processing Parameters
+
+```python
 # All configuration options
 embeddings = embedder.process_repository(
     repo_url="https://github.com/user/repo",  # Git URL or local path
@@ -104,32 +115,30 @@ embeddings = embedder.process_repository(
     batch_size=32,             # Processing batch size
     max_files=1000            # Maximum files to process
 )
-Available Embedding Models
-OpenAI Models:
+```
 
-text-embedding-ada-002 (1536 dim)
+### Available Embedding Models
 
-text-embedding-3-small (1536 dim)
+**OpenAI Models:**
+- `text-embedding-ada-002` (1536 dim)
+- `text-embedding-3-small` (1536 dim) 
+- `text-embedding-3-large` (3072 dim)
 
-text-embedding-3-large (3072 dim)
+**Sentence Transformers Models:**
+- `all-MiniLM-L6-v2` (384 dim)
+- `all-mpnet-base-v2` (768 dim)
+- `multi-qa-mpnet-base-dot-v1` (768 dim)
 
-Sentence Transformers Models:
+**HuggingFace Models:**
+- Any sentence transformer compatible model
 
-all-MiniLM-L6-v2 (384 dim)
+## 📊 Output Format
 
-all-mpnet-base-v2 (768 dim)
+### Embedding Structure
 
-multi-qa-mpnet-base-dot-v1 (768 dim)
-
-HuggingFace Models:
-
-Any sentence transformer compatible model
-
-📊 Output Format
-Embedding Structure
 Each embedding contains:
 
-python
+```python
 {
     'content': 'def calculate_sum(a, b):\n    return a + b',
     'file_path': 'src/math_utils.py', 
@@ -143,9 +152,13 @@ python
         'token_count': 45
     }
 }
-🔧 API Reference
-GitRAGEmbedder Class
-python
+```
+
+## 🔧 API Reference
+
+### GitRAGEmbedder Class
+
+```python
 class GitRAGEmbedder:
     def __init__(
         self,
@@ -163,8 +176,11 @@ class GitRAGEmbedder:
         batch_size: int = 32,
         max_files: int = 1000
     ) -> List[Dict[str, Any]]
-EmbeddingGenerator Class
-python
+```
+
+### EmbeddingGenerator Class
+
+```python
 class EmbeddingGenerator:
     def __init__(self, backend: str = "sentence_transformers", **backend_kwargs)
     
@@ -177,16 +193,19 @@ class EmbeddingGenerator:
     
     def embed_single_text(self, text: str) -> List[float]
     def get_embedding_dimension(self) -> int
-Available Backends
-OpenAIEmbeddingBackend - For OpenAI embedding API
+```
 
-SentenceTransformersBackend - For local sentence transformer models
+### Available Backends
 
-HuggingFaceEmbeddingBackend - For HuggingFace transformer models
+- `OpenAIEmbeddingBackend` - For OpenAI embedding API
+- `SentenceTransformersBackend` - For local sentence transformer models  
+- `HuggingFaceEmbeddingBackend` - For HuggingFace transformer models
 
-🏗️ Advanced Usage
-Custom Processing Pipeline
-python
+## 🏗️ Advanced Usage
+
+### Custom Processing Pipeline
+
+```python
 from git_rag_embedder import GitRAGEmbedder, EmbeddingGenerator
 
 # Step-by-step processing
@@ -203,8 +222,11 @@ embedding_gen = EmbeddingGenerator(
 )
 
 embeddings = embedding_gen.generate_embeddings(documents)
-Multiple Repositories
-python
+```
+
+### Multiple Repositories
+
+```python
 repositories = [
     "https://github.com/org/repo1",
     "https://github.com/org/repo2", 
@@ -215,33 +237,54 @@ all_embeddings = []
 for repo in repositories:
     embeddings = embedder.process_repository(repo)
     all_embeddings.extend(embeddings)
-Save/Load Embeddings
-python
+```
+
+### Save/Load Embeddings
+
+```python
 # Save for later use
 embedder.save_embeddings(embeddings, "my_embeddings.json")
 
 # Load saved embeddings
 loaded_embeddings = embedder.load_embeddings("my_embeddings.json")
-🔍 Backend Details
-OpenAI Backend
-python
+```
+
+## 🔍 Backend Details
+
+### OpenAI Backend
+```python
 backend = OpenAIEmbeddingBackend(
     api_key="your-key",  # Optional, uses OPENAI_API_KEY env var
     model="text-embedding-3-small"
 )
-Sentence Transformers Backend
-python
+```
+
+### Sentence Transformers Backend
+```python
 backend = SentenceTransformersBackend(
     model_name="all-MiniLM-L6-v2"  # Any sentence-transformers model
 )
-HuggingFace Backend
-python
+```
+
+### HuggingFace Backend
+```python
 backend = HuggingFaceEmbeddingBackend(
     model_name="sentence-transformers/all-MiniLM-L6-v2"  # Any HF model
 )
-📝 License
-MIT License - see LICENSE file for details.
+```
 
-📞 Support
-Issues: GitHub Issues
+## 📝 License
 
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## 📞 Support
+
+- **Issues**: [GitHub Issues](https://github.com/yourusername/git-rag-embedder/issues)
+
+---
+
+**Focus**: Pure Git repository to embedding conversion pipeline. No search, no quality metrics, just embeddings.
+
+---
+
+*Star this repository if you find it helpful! ⭐*
