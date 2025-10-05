@@ -7,9 +7,7 @@
 
 ## 🚀 Overview
 
-**GitRAG Embedder** is a focused library that converts Git repositories into embedding vectors. Pure processing pipeline - from repository cloning to embedding generation. No quality metrics, no search capabilities, just embeddings.
-
-**Core Focus**: Transform any Git repository into embedding vectors for your RAG systems.
+**GitRAG Embedder** is a focused library that converts Git repositories into embedding vectors. Pure processing pipeline - from repository cloning to embedding generation.
 
 ## ✨ Features
 
