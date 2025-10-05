@@ -1,7 +1,7 @@
 [project]
 name = "git-rag-embedder"
 version = "0.1.0"
-description = "Lightweight library to convert GitHub repositories into embeddings"
+description = "Minimalist library to convert Git repositories and local directories into embeddings"
 authors = [
     {name = "Your Name", email = "your.email@example.com"},
 ]
@@ -25,9 +25,6 @@ dev = [
     "black>=21.0",
     "isort>=5.0",
 ]
-
-[project.scripts]
-gitrag = "git_rag_embedder.cli:main"
 
 [build-system]
 requires = ["setuptools>=45", "wheel"]
