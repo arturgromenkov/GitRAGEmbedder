@@ -1,4 +1,4 @@
-name: git_rag_embedder
+name: git-rag-embedder
 
 on:
   release:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/git_rag_embedder
+      url: https://pypi.org/p/git-rag-embedder
     permissions:
       id-token: write
     steps:
