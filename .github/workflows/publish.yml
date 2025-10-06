@@ -1,8 +1,8 @@
-name: Publish Python Package
+name: Publish Python Package to PyPI
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   pypi-publish:
@@ -12,11 +12,13 @@ jobs:
       name: pypi
       url: https://pypi.org/p/git-rag-embedder
     permissions:
-      id-token: write  # Required for trusted publishing:cite[3]:cite[6]
+      id-token: write  # Для trusted publishing без токенов
+    
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
-          persist-credentials: false:cite[6]
+          persist-credentials: false
       
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -26,11 +28,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install build:cite[6]:cite[8]
+          pip install build
       
       - name: Build package
         run: |
-          python -m build:cite[6]:cite[8]
+          python -m build
       
-      - name: Publish package distributions to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1:cite[3]:cite[6]
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
