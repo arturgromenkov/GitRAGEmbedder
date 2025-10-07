@@ -69,7 +69,7 @@ class Chunker:
                             chunk_size: int,
                             chunk_overlap: int) -> List[Dict[str, Any]]:
         content = document['content']
-        tokens = self.encoding.encode(content)
+        tokens = self.encoding.encode(content, disallowed_special=())
         
         if len(tokens) <= chunk_size:
             return [self._create_chunk(document, content, 0, len(content), 1, 1)]
@@ -181,9 +181,10 @@ class Chunker:
             r'export\s+default',
             r'import\s+.*?from',
         ]
-        
         for pattern in patterns:
             splits = re.split(f'({pattern})', content)
+            # Фильтруем None элементы
+            splits = [s for s in splits if s is not None]
             if len(splits) > 1:
                 reconstructed = []
                 for i in range(0, len(splits), 2):
@@ -193,7 +194,7 @@ class Chunker:
                             reconstructed.append(segment)
                 if reconstructed:
                     return reconstructed
-        
+    
         return [content]
     
     def _split_clike_code(self, content: str) -> List[str]:
@@ -284,7 +285,7 @@ class Chunker:
                      end_idx: int,
                      chunk_number: int,
                      total_tokens: int) -> Dict[str, Any]:
-        chunk_tokens = len(self.encoding.encode(content))
+        chunk_tokens = len(self.encoding.encode(content, disallowed_special=()))
         
         return {
             'content': content,
